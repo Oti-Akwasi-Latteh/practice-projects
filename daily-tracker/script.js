@@ -15,10 +15,10 @@ function addTask() {
         // If in edit mode, update the existing list item
         editMode.firstChild.textContent = inputBox.value;
         addBtn.innerHTML = "Add";
-        addBtn.onclick = addTask; 
+        addBtn.onclick = updateTask; 
         editMode = null; 
     } else {
-        let li = document.createElement("li");
+        const li = document.createElement("li");
         li.textContent = inputBox.value; 
 
         // Create Delete Button
@@ -27,11 +27,11 @@ function addTask() {
         span.classList.add("delete");
         span.onclick = function () {
             li.remove();
-            saveData();
+             saveDataToLocalStorage();
         };
 
         // Create Edit Button
-        let editBtn = document.createElement("button");
+        const editBtn = document.createElement("button");
         editBtn.innerHTML = "&#9998;"; 
         editBtn.classList.add("edit");
         editBtn.onclick = function () {
@@ -45,7 +45,7 @@ function addTask() {
     }
 
     inputBox.value = "";
-    saveData();
+     saveDataToLocalStorage();
 }
 
 // Function to Edit Task
@@ -59,7 +59,7 @@ function editTask(li) {
         addBtn.innerHTML = "Add"; 
         addBtn.onclick = addTask; 
         editMode = null; 
-        saveData();
+         saveDataToLocalStorage();
     };
 }
 
@@ -67,7 +67,7 @@ function editTask(li) {
 listContainer.addEventListener("click", function (e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
-        saveData();
+         saveDataToLocalStorage();
     }
 });
 
@@ -86,7 +86,7 @@ searchList.addEventListener("input", function () {
 });
 
 // Save and Load Tasks
-function saveData() {
+function saveDataToLocalStorage(){
     localStorage.setItem("data", listContainer.innerHTML);
 }
 
@@ -94,15 +94,15 @@ function showTask() {
     listContainer.innerHTML = localStorage.getItem("data");
 
     // Reattach event listeners after loading from storage
-    let spans = document.querySelectorAll(".delete");
+    const spans = document.querySelectorAll(".delete");
     spans.forEach(span => {
         span.onclick = function () {
             span.parentElement.remove();
-            saveData();
+             saveDataToLocalStorage();
         };
     });
 
-    let editButtons = document.querySelectorAll(".edit");
+    const editButtons = document.querySelectorAll(".edit");
     editButtons.forEach(editBtn => {
         editBtn.onclick = function () {
             editTask(editBtn.parentElement);
@@ -110,4 +110,4 @@ function showTask() {
     });
 }
 
-showTask();
+ saveDataToLocalStorage();
