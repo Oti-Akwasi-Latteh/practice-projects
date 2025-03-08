@@ -110,4 +110,4 @@ function showTask() {
     });
 }
 
- saveDataToLocalStorage();
+ ShowTask();
