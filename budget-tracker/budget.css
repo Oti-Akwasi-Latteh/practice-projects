@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Kenia&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --light:#f6f6f9;
+    --light-primary:#1976d3;
+    --grey:#fff;
+    --dark-grey:#aaaaaa;
+    --dark:#363949;
+    --danger:#d32f2f;
+    --light-danger:#fecdd3;
+    --warning:#fbc02d;
+    --light-warning:#fff2c6;
+    --success:#388e3c;
+    --light-success:#bbf7d0;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'lato', sans-serif;
+    height:100vh;
+    background-color:var(--light);
+}
+
+.container{
+    max-width:1280px;
+    margin:0 auto;
+    background-color:var(--grey);
+    border-radius:5px;
+    width:100%;
+    overflow-x:hidden;
+}
+
+
+.container h2{
+    margin-top:3rem;
+    padding:2rem;
+    color:var(--dark);
+    text-align:center;
+    font-size:4rem;
+
+}
+
+.error-message{
+    background-color:var(--danger);
+    color:#fff;
+    text-align:center;
+    width:400px;
+    margin:0 auto;
+    border-radius:5px;
+    display:none;
+}
+
+.error-message.error{
+    display:block;
+    transition:all 0.8s ease-in;
+} 
+
+.budget-content{
+
+    padding:2rem;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+.ur-budget form input,
+.ur-expense form input{
+    padding:0.4rem 1rem;
+    width:200px;
+    border:1px solid;
+    font-family:inherit;
+    font-size:1rem;
+    margin-left:0.5rem;
+    border-radius:3px;
+}
+
+.ur-budget form input:focus,
+.ur-expense form input:focus{
+    outline:none;
+}
+
+
+.ur-budget form,
+.ur-expense form {
+position:relative;
+
+}
+.budget-content .btn{
+    
+    right:0;
+    outline:none;
+    border:none;
+    padding:0.6rem 1rem;
+    font-family:inherit;
+    border-bottom-right-radius:5px;
+    color:var(--light);
+    border-top-right-radius:5px;
+    cursor:pointer;
+    background-color:#f8872b;
+   
+}
+
+.budget-content .btn:hover{
+    background-color: #f8872b;
+
+}
+
+/* cards start*/
+.container .cards {
+    display:flex;
+    justify-content:space-around;
+    padding:1rem;
+}
+
+.container .cards li{
+    padding:1.8rem;
+    background-color:var(--light);
+    align-items:center;
+    border-radius:5px;
+    display:flex;
+    gap:1.5rem;
+    cursor:pointer;
+    transition:all 0.3s ease-in;
+}
+ 
+.container .cards li:hover{
+    transform:translateY(-10px);
+
+}
+
+.container .cards li .bx{
+    width:4.5rem;
+    height:4.5rem;
+    display:flex;
+    font-size:36px;
+    border-radius:10px;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.container .cards li:nth-child(1) .bx{
+    background-color:var(--light-success);
+    color:var(--success);
+}
+
+.container .cards li:nth-child(2) .bx{
+    background-color:var(--light-primary);
+    color:var(--warning);
+}
+
+.container .cards li:nth-child(3) .bx{
+    background-color:var(--danger);
+    color:var(--primary);
+}
+
+.container .cards li .info p {
+     color:var(--dark);
+}
+
+.container .cards li .info h3{
+    font-size:1.5rem;
+    font-weight:600;
+    color:var(--dark);
+}
+/* cards ends*/
+
+/* start table */
+.table-content{
+    padding:1.5rem;
+    background-color:var(--light);
+    border-radius:5px;
+    margin:1rem 2rem;
+}
+
+.table-content h3{
+    display:flex;
+    font-size:1.5rem;
+    align-items:center;
+    justify-content:center;
+}
+.tbl-tr-content{
+    display:grid;
+    list-style-type:none;
+    grid-template-columns: 4fr 40% 30% 2fr;
+    align-items:center;
+    background-color:var(--dark);
+    color:var(--light);
+    border-radius:5px;
+    padding:0.3rem 0.7rem;
+    margin:0.5rem 0;
+    cursor:pointer; 
+}
+
+.table-data{
+    overflow-y:auto;
+    height:150px;
+}
+
+.tbl-tr-content button{
+    color:var(--light);
+    padding:0.4rem;
+    outline:none;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.tbl-tr-content .btn-edit{
+    background-color:#f8872b;
+}
+
+.tbl-tr-content .btn-delete{
+    background-color:var(--danger);
+}
+/*table ends*/
