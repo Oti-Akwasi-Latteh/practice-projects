@@ -1,0 +1,205 @@
+/* ===================== RESET ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* ===================== BODY & BACKGROUND ===================== */
+body {
+    background: #1e1e1e;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ===================== OVERLAY ===================== */
+.overlay {
+    background: #dcdcdc;
+    width: 90%;
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* ===================== CONFIRMATION CARD ===================== */
+.confirm-card {
+    background: #f5f5f5;
+    padding: 40px;
+    border-radius: 20px;
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.confirm-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* ===================== ICON ===================== */
+.icon {
+    width: 80px;
+    height: 80px;
+    background: #b7e4c7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    animation: popIn 0.6s ease forwards;
+}
+
+.icon i {
+    font-size: 35px;
+    color: #2d6a4f;
+    transition: transform 0.3s ease;
+}
+
+.icon:hover i {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* ===================== TITLE & MESSAGE ===================== */
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    color: #111;
+}
+
+.message {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* ===================== STEPS BOX ===================== */
+.steps {
+    background: #e0e0e0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    margin-bottom: 25px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.steps:hover {
+    background: #d4d4d4;
+    transform: translateY(-3px);
+}
+
+.steps h4 {
+    margin-bottom: 10px;
+}
+
+.steps ul {
+    padding-left: 20px;
+}
+
+.steps li {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #333;
+}
+
+/* ===================== BUTTON ===================== */
+.home-btn {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background: #333;
+    transform: scale(1.03);
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .overlay {
+        flex-direction: column;
+        padding: 30px;
+    }
+    
+    .confirm-card {
+        width: 90%;
+        padding: 30px;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    .icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .icon i {
+        font-size: 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .overlay {
+        padding: 20px;
+    }
+    
+    .confirm-card {
+        width: 100%;
+        padding: 25px;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    .message {
+        font-size: 13px;
+    }
+    
+    .steps li {
+        font-size: 12px;
+    }
+    
+    .home-btn {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
