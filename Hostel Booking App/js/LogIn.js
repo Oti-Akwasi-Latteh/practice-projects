@@ -1,9 +1,5 @@
-// LogIn.js
 
-
-
-
-// js/LogIn.js
+// LogIn
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -36,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       // ================= SEND TO BACKEND =================
-      const response = await fetch("http://localhost:5500/api/users/login", {
+      const response = await fetch("https://bookie-hostel.onrender.com/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -151,77 +147,13 @@ document.querySelectorAll(".toggle-password").forEach(icon => {
   });
 });
 
-  // ================= HELPER: Remove Messages =================
+  // =================  Remove Messages =================
   function removeMessages() {
     document.querySelectorAll(".error-msg, .success-msg").forEach(el => el.remove());
   }
   
 
 });
-/*--
 
 
-
-document.getElementById("take-In").addEventListener("click", async () => {
-
-    // ------------------------------
-    // GET FORM VALUES
-    // ------------------------------
-    const email = document.getElementById("mail").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const confirmPassword = document.getElementById("password-confirm").value.trim();
-
-    // ------------------------------
-    // VALIDATION
-    // ------------------------------
-    if (!email || !password || !confirmPassword) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return;
-    }
-
-    try {
-        // ------------------------------
-        // SEND LOGIN REQUEST TO BACKEND
-        // ------------------------------
-       const response = await fetch("http://localhost:5500/api/users/login", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email, password })
-});
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            alert(data.error || "Login failed");
-            return;
-        }
-
-        // ------------------------------
-        // SAVE CURRENT USER SESSION
-        // ------------------------------
-        localStorage.setItem("currentUser", JSON.stringify(data.user));
-
-        alert("Login successful!");
-
-        // ------------------------------
-        // REDIRECT TO DASHBOARD / LANDING PAGE
-        // ------------------------------
-        window.location.href = "LandingPage.html";
-
-    } catch (error) {
-        console.error(error);
-        alert("Cannot connect to server. Make sure backend is running.");
-    }
-
-});
-
-
-
-
---*/
 
