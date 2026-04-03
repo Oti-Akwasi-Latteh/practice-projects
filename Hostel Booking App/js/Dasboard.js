@@ -36,7 +36,7 @@ async function loadUserApplications() {
   `;
 
   try {
-    const response = await fetch("http://localhost:5500/api/students");
+    const response = await fetch("https://bookie-hostel.onrender.com/api/students");
     const applications = await response.json();
 
     if (!response.ok) {
