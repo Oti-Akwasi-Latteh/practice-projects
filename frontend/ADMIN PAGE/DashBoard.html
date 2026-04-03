@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="DashBoard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+  <div class="profile">
+    <div class="avatar">
+      <i class="fas fa-user"></i>
+    </div>
+    <h2 id="adminName">Admin</h2>
+    <p>Administrator</p>
+  </div>
+
+ <ul>
+  <li onclick="showSection('dashboardSection')">Dashboard</li>
+  <li onclick="showSection('hostelSection')">Hostel</li>
+  <li onclick="showSection('applicationsSection')">Applications</li>
+  <li onclick="showSection('roomsSection')">Rooms</li>
+  <li onclick="showSection('allocationSection')">Allocations</li>
+  <li onclick="showSection('usersSection')">Users</li>
+</ul>
+
+  <button id="logoutBtn">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+
+</div>
+
+<div class="main">
+
+  <h1>Bookie Dashboard</h1>
+
+  <!-- ================= DASHBOARD HOME ================= -->
+  <div id="dashboardSection" class="section active">
+
+    <div class="cards">
+      <div class="card blue">Total Hostels <br><span>10</span></div>
+      <div class="card orange">Total Bookings <br><span>75</span></div>
+      <div class="card green">Total Users <br><span>100</span></div>
+      <div class="card red">Total Allocations <br><span>200</span></div>
+    </div>
+
+  </div>
+
+
+
+  <div id="hostelSection" class="section">
+
+  <h2>Hostel Management</h2>
+
+  <!-- ADD HOSTEL -->
+ <div style="margin-bottom: 20px;">
+  <input id="hostelName" placeholder="Hostel Name">
+  <input id="hostelDescription" placeholder="Description">
+  <input id="hostelLocation" placeholder="Location">
+  <input id="hostelContact" placeholder="Contact Info">
+
+
+  <button onclick="addHostel()">Add Hostel</button>
+</div>
+  <!-- HOSTEL LIST -->
+  <table>
+    <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Contact Info</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
+    <tbody id="hostelTable"></tbody>
+  </table>
+
+</div>
+
+  <!-- ================= APPLICATIONS ================= -->
+  <div id="applicationsSection" class="section">
+
+    <h2>Applications</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Room</th>
+          <th>Date</th>
+          <th>Status</th>
+           <th>Gender</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody id="applicationsTable"></tbody>
+    </table>
+
+  </div>
+
+  <!-- ================= ROOMS ================= -->
+  <div id="roomsSection" class="section">
+
+  <h2>Room Management</h2>
+
+  <!-- ADD ROOM FORM -->
+  <div style="margin-bottom: 20px;">
+    <input id="roomName" placeholder="Room Number">
+    <input id="roomCapacity" type="number" placeholder="Capacity">
+    <button onclick="addRoom()">Add Room</button>
+  </div>
+
+  <!-- ROOM LIST -->
+  <table>
+    <thead>
+      <tr>
+        <th>Room ID</th>
+        <th>Room Number</th>
+        <th>Capacity</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="roomList"></tbody>
+  </table>
+
+</div>
+
+
+
+<div id="allocationSection" class="section">
+
+  <h2>Hostel Allocations</h2>
+
+  <div style="margin-bottom:20px;">
+    <input id="allocStudentId" type="number" placeholder="Approved Student ID">
+    <input id="allocRoomId" type="number" placeholder="Room ID">
+    <button id="allocateBtn">Allocate Student</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Allocation ID</th>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Room ID</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="allocationTable"></tbody>
+  </table>
+
+</div>
+
+  <!-- ================= USERS ================= -->
+  <div id="usersSection" class="section">
+
+  <h2>Users</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="usersList"></tbody>
+  </table>
+
+</div>
+
+</div>
+
+<script src="DashBoard.js"></script>
+
+</body>
+</html>

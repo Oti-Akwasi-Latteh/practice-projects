@@ -1,0 +1,292 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef4ff, #dbe7ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.home {
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 20px;
+}
+
+.home a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.home a:hover {
+  color: #3a73c9;
+  transform: translateX(-4px);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-bg {
+  width: 100%;
+  max-width: 1050px;
+  min-height: 620px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.8s ease;
+}
+
+.image-section {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #4a7de2, #5ea2ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.student-image {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.student-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.info-box {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 18px;
+  border-radius: 16px;
+  max-width: 250px;
+  backdrop-filter: blur(10px);
+  animation: slideUp 0.8s ease;
+}
+
+.info-box h3 {
+  color: #3a73c9;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.info-box p {
+  color: #444;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 40px;
+}
+
+.left-form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  color: #3a73c9;
+  margin-bottom: 35px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+label {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #c9c9c9;
+  background: transparent;
+  padding: 14px 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+input:focus {
+  border-bottom: 2px solid #3a73c9;
+  transform: translateY(-2px);
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 45px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #3a73c9;
+  transform: translateY(-50%) scale(1.15);
+}
+
+.signup {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3a73c9, #5ea2ff);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(58, 115, 201, 0.35);
+}
+
+.signup:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .login-bg {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .image-section {
+    padding: 25px 20px 90px;
+  }
+
+  .student-image {
+    max-width: 340px;
+  }
+
+  .info-box {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    width: calc(100% - 40px);
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .form-section {
+    padding: 40px 25px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .home {
+    margin-bottom: 12px;
+  }
+
+  .login-bg {
+    border-radius: 18px;
+  }
+
+  .image-section {
+    padding: 20px 15px 85px;
+  }
+
+  .student-image {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .form-section {
+    padding: 30px 18px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+  }
+
+  input {
+    font-size: 0.95rem;
+    padding: 12px 8px;
+  }
+
+  .signup {
+    padding: 13px;
+    font-size: 0.95rem;
+  }
+
+  .info-box {
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+}

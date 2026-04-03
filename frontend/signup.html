@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+
+  <link rel="stylesheet" href="./css/signup.css">
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="home">
+    <a href="index.html">← Home</a>
+  </div>
+
+  <div class="container">
+
+    <!-- LEFT SIDE FORM -->
+    <div class="form-section">
+
+      <p class="account">
+        Already have an account?
+        <a href="Login.html">Login</a>
+      </p>
+
+      <h1>Sign Up</h1>
+
+      <form id="signupForm">
+
+        <label>
+          <input id="user" type="text" placeholder="User name">
+        </label>
+
+        <label>
+          <input id="email" type="email" placeholder="Email">
+        </label>
+
+        <label>
+          <div class="password-wrapper">
+            <input id="password" type="password" placeholder="Password">
+            <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
+          </div>
+        </label>
+
+        <label>
+          <input id="confirm-password" type="password" placeholder="Confirm Password">
+        </label>
+
+      </form>
+
+      <p class="terms">
+        By signing up I agree to accept the
+        <span>terms and conditions</span>
+      </p>
+
+      <div class="form-bottom">
+
+        <button type="button" id="signIn" class="signup">
+          Sign Up
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <div class="social">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-google"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE IMAGE -->
+    <div class="image-section">
+
+      <img src="./images/3d security.jpg" alt="Signup illustration">
+
+      <div class="info-box">
+        <h3>Your Choice, We Provide</h3>
+
+        <p>
+          Signup and get access to all the affordable hostels
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="./js/SignUp.js"></script>
+</body>
+</html>
