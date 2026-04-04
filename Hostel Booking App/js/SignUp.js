@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       // ================= SEND TO BACKEND =================
       // Only send username, email, password — backend handles location
-      const response = await fetch("http://localhost:5500/api/users/signup", {
+      const response = await fetch("https://bookie-hostel.onrender.com/api/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // ================= HELPER: Reset Button =================
+  // ============== Reset Button =================
   function resetButton() {
     const btn = document.getElementById("signIn");
     btn.disabled = false;
@@ -93,13 +93,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // ================= HELPER: Email Validator =================
+  // ============ Email Validator =================
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
 
-  // ================= HELPER: Show Error =================
+  // ============== Show Error =================
   function showError(message) {
     removeMessages();
 
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // ================= HELPER: Show Success =================
+  // ============Show Success =================
   function showSuccess(message) {
     removeMessages();
 
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  // ================= HELPER: Remove Messages =================
+  // ==============Remove Messages =================
   function removeMessages() {
     document.querySelectorAll(".error-msg, .success-msg").forEach(el => el.remove());
   }
@@ -162,61 +162,3 @@ document.querySelectorAll(".toggle-password").forEach(icon => {
 
 });
 
-/*-
-
-document.getElementById("signIn").addEventListener("click", async () => {
-
-  const username = document.getElementById("user").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirm-password").value.trim();
-
-  // ===============================
-  // VALIDATION
-  // ===============================
-  if (!username || !email || !password || !confirmPassword) {
-    alert("Please fill all fields");
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    alert("Passwords do not match");
-    return;
-  }
-
-  try {
-
-    // ===============================
-    // SEND TO BACKEND (DATABASE)
-    // ===============================
-    const response = await fetch("http://localhost:5500/api/users/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, email, password })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      alert(data.error || "Signup failed");
-      return;
-    }
-
-    // ===============================
-    // SAVE CURRENT USER (SESSION ONLY)
-    // ===============================
-    localStorage.setItem("currentUser", JSON.stringify(data.user));
-
-    alert("Signup successful!");
-    window.location.href = "LandingPage.html";
-
-  } catch (error) {
-    console.error(error);
-    alert("Server error. Make sure backend is running.");
-  }
-
-});
-
---*/
