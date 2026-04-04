@@ -31,7 +31,7 @@ document.querySelectorAll(".book-room").forEach((button) => {
     const price = this.dataset.price.trim();
 
     try {
-      const hostelResponse = await fetch("http://localhost:5500/api/hostels");
+      const hostelResponse = await fetch("https://bookie-hostel.onrender.com/api/hostels");
       const hostels = await hostelResponse.json();
 
       const hostel = hostels.find(
@@ -43,7 +43,7 @@ document.querySelectorAll(".book-room").forEach((button) => {
         return;
       }
 
-      const roomResponse = await fetch("http://localhost:5500/api/rooms");
+      const roomResponse = await fetch("https://bookie-hostel.onrender.com/api/rooms");
       const rooms = await roomResponse.json();
 
       const roomCapacity = parseInt(roomType);
