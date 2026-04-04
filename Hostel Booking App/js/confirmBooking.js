@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const roomsResponse = await fetch("http://localhost:5500/api/rooms");
+      const roomsResponse = await fetch("https://bookie-hostel.onrender.com/api/rooms");
       const rooms = await roomsResponse.json();
       const room = rooms.find(r => String(r.id) === String(selectedBooking.roomId));
       if (!room) throw new Error("Room not found");
