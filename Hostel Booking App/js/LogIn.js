@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    localStorage.setItem("isLoggedIn", "true");
+   localStorage.setItem("userLoggedIn", "true");
 
     showSuccess("Login successful!");
 
