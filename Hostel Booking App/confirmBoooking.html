@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Bookings</title>
+<link rel="stylesheet" href="./css/confirmBooking.css">
+</head>
+<body>
+
+<!-- MODAL -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">✖</span>
+    <p id="modalText" class="description"></p>
+
+    <div class="form">
+      <div class="row">
+        <input type="text" id="firstName" placeholder="First Name">
+        <input type="text" id="lastName" placeholder="Last Name">
+      </div>
+
+      <input type="email" id="email" placeholder="someone@example.com">
+      <input type="text" id="school" placeholder="Enter Name of Institution(School)">
+
+      <select id="gender" class="gender-select">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <button class="apply-btn-final" id="submitApplication">Apply Now</button>
+      <p id="formError" style="color:red; font-size:13px;"></p>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="banner">
+  <a href="Rooms.html">← Rooms</a>
+  <h1>My Bookings</h1>
+</div>
+
+<!-- BOOKINGS -->
+<div id="bookingContainer"></div>
+
+<script src="./js/confirmBooking.js"></script>
+</body>
+</html>

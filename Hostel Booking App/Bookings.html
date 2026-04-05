@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookie Dashboard</title>
+
+<link rel="stylesheet" href="./css/Bookings.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2 class="logo">Bookie</h2>
+
+<div class="profile">
+
+<div class="avatar">
+<i class="fa fa-user"></i>
+</div>
+
+<h3 id="username"></h3>
+<p>student</p>
+
+</div>
+
+<ul class="menu">
+
+<li class="active">
+<a href="#"><i class="fa fa-th-large"></i> Bookings</a>
+</li>
+
+<li>
+<a href="Rooms.html"><i class="fa fa-th-large"></i> Rooms</a>
+</li>
+
+<li>
+<a href="LandingPage.html"><i class="fa fa-home"></i> Home</a>
+</li>
+
+</ul>
+
+<button  id="remove-user" class="logout">
+<i class="fa fa-sign-out-alt"></i> Logout
+</button>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+<h2>My Bookings</h2>
+
+<div id="dashboardContainer"></div>
+
+</div>
+<script src="./js/Dasboard.js"></script>
+</body>
+</html>
