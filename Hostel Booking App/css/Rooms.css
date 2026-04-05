@@ -19,6 +19,8 @@ body {
   padding: 15px 50px;
   background: #9b4f0b;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 200;
   transition: all 0.3s ease;
 }
 
@@ -34,10 +36,12 @@ body {
   transform: scale(1.05);
 }
 
+/* ================== NAV — desktop unchanged ================== */
 nav {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 nav a {
@@ -66,7 +70,7 @@ nav a.active {
   color: #1e90ff;
 }
 
-/* ROOM ICON / USER ICON */
+/* ROOM ICON */
 .room-icon {
   font-size: 22px;
   color: white;
@@ -105,6 +109,47 @@ nav a.active {
   transform: translateY(-2px);
 }
 
+/* ================== HAMBURGER — hidden on desktop ================== */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  z-index: 300;
+}
+
+.nav-toggle:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
 /* ================== HERO ================== */
 .hero {
   height: 300px;
@@ -136,7 +181,7 @@ nav a.active {
 
 @keyframes heroTextFade {
   from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ================== TITLE ================== */
@@ -189,19 +234,14 @@ nav a.active {
   transition: color 0.3s ease;
 }
 
-.stars i {
-  color: yellow;
-  margin-right: 3px;
-}
+.stars i { color: yellow; margin-right: 3px; }
 
 .price {
   float: right;
   font-size: 16px;
 }
 
-.book-row {
-  margin-top: 10px;
-}
+.book-row { margin-top: 10px; }
 
 .book-row button {
   background: #ddd;
@@ -217,9 +257,7 @@ nav a.active {
   transform: translateY(-2px);
 }
 
-.icons {
-  margin-top: 10px;
-}
+.icons { margin-top: 10px; }
 
 .icons i {
   background: #ddd;
@@ -236,7 +274,6 @@ nav a.active {
   color: white;
 }
 
-/* LOCATION INFO */
 .location {
   margin-top: 10px;
   display: flex;
@@ -260,32 +297,74 @@ nav a.active {
   transition: transform 0.3s ease;
 }
 
-#booking-count:hover {
-  transform: scale(1.2);
-}
+#booking-count:hover { transform: scale(1.2); }
 
-/* ================== RESPONSIVE ================== */
+/* ================== RESPONSIVE — LARGE ================== */
 @media (max-width: 1200px) {
   .rooms-container { grid-template-columns: repeat(3, 1fr); }
   .hero h1 { font-size: 70px; }
 }
 
+/* ================== RESPONSIVE — TABLET ================== */
 @media (max-width: 992px) {
   .rooms-container { grid-template-columns: repeat(2, 1fr); }
-  nav { flex-direction: column; width: 100%; gap: 10px; margin-top: 50px; }
 }
 
+/* ================== RESPONSIVE — MOBILE ================== */
 @media (max-width: 768px) {
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 0;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    gap: 0;
+    padding: 0 4px;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                padding 0.3s ease;
+  }
+
+  nav.open {
+    max-height: 400px;
+    opacity: 1;
+    padding: 10px 4px 14px;
+  }
+
+  nav a {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
   .rooms-container { grid-template-columns: 1fr; }
   .hero h1 { font-size: 50px; text-align: center; padding: 0 20px; }
-  .navbar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 15px 20px; }
-
-  nav { width: 100%; justify-content: flex-start; }
-  .book-btn { width: 100%; text-align: center; }
+  .book-btn { width: auto; }
 }
 
+/* ================== RESPONSIVE — SMALL MOBILE ================== */
 @media (max-width: 480px) {
   .hero h1 { font-size: 36px; }
-  nav a { font-size: 16px; margin: 5px 0; }
+  nav a { font-size: 16px; }
   .room-card img { height: 120px; }
+  .navbar { padding: 10px 16px; }
 }
