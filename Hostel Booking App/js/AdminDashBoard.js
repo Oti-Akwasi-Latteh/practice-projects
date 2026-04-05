@@ -768,3 +768,60 @@ window.addEventListener("DOMContentLoaded", () => {
     allocBtn.addEventListener("click", allocateStudent);
   }
 });
+
+
+
+
+ // ================= HAMBURGER TOGGLE =================
+  const hamburger = document.getElementById("hamburger");
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+
+  function openSidebar() {
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+  }
+
+  hamburger.addEventListener("click", () => {
+    sidebar.classList.contains("open") ? closeSidebar() : openSidebar();
+  });
+
+  overlay.addEventListener("click", closeSidebar);
+
+  // ================= NAV + CLOSE ON MOBILE =================
+  function navTo(sectionId) {
+    showSection(sectionId);
+    if (window.innerWidth <= 768) closeSidebar();
+  }
+
+  // ================= ACTIVE NAV HIGHLIGHT =================
+  document.querySelectorAll(".sidebar ul li").forEach(li => {
+    li.addEventListener("click", () => {
+      document.querySelectorAll(".sidebar ul li").forEach(el => el.classList.remove("active"));
+      li.classList.add("active");
+    });
+  });
+
+  // Set first item active on load
+  document.querySelector(".sidebar ul li").classList.add("active");
+
+  // ================= LIVE DASHBOARD COUNTS =================
+  function updateCounts() {
+    const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
+    const bookings = JSON.parse(localStorage.getItem("bookedHostels")) || [];
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    const allocated = students.filter(s => s.applicationStatus === "Allocated");
+
+    document.getElementById("totalHostels").textContent = hostels.length;
+    document.getElementById("totalBookings").textContent = bookings.length;
+    document.getElementById("totalUsers").textContent = users.length;
+    document.getElementById("totalAllocations").textContent = allocated.length;
+  }
+
+  document.addEventListener("DOMContentLoaded", updateCounts);
