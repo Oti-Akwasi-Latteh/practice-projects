@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
       isAdmin: newUser.isAdmin
     };
 
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    localStorage.setItem("isLoggedIn", "true");
+ localStorage.setItem("currentUser", JSON.stringify(currentUser));
+localStorage.setItem("userLoggedIn", "true"); // <-- changed key
 
     showSuccess("Signup successful!");
 
