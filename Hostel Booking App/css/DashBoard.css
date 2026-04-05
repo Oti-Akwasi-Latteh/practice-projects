@@ -158,9 +158,13 @@ body {
 
 /* =========================
    LOGOUT BUTTON
+   — sits above the bottom with
+     margin-top: auto pushing nav
+     up, then a fixed bottom gap
 ========================= */
 #logoutBtn {
   margin-top: auto;
+  margin-bottom: 24px;        /* lift off the very bottom */
   padding: 12px;
   width: 100%;
   border: none;
@@ -170,7 +174,9 @@ body {
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  transition: background 0.25s ease, color 0.25s ease,
+              transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 #logoutBtn i {
@@ -181,6 +187,11 @@ body {
   background: #e84118;
   color: white;
   transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(232,65,24,0.4);
+}
+
+#logoutBtn:active {
+  transform: scale(0.98);
 }
 
 /* =========================
@@ -418,45 +429,35 @@ td button:active {
   color: white;
 }
 
-.approve-btn:hover {
-  background: #1e7e34;
-}
+.approve-btn:hover { background: #1e7e34; }
 
 .reject-btn {
   background: #dc3545;
   color: white;
 }
 
-.reject-btn:hover {
-  background: #b02030;
-}
+.reject-btn:hover { background: #b02030; }
 
 .delete-btn {
   background: #e84118;
   color: white;
 }
 
-.delete-btn:hover {
-  background: #c0320e;
-}
+.delete-btn:hover { background: #c0320e; }
 
 td button[onclick*="edit"] {
   background: #ffc107;
   color: #333;
 }
 
-td button[onclick*="edit"]:hover {
-  background: #e0a800;
-}
+td button[onclick*="edit"]:hover { background: #e0a800; }
 
 td button[onclick*="delete"] {
   background: #e84118;
   color: white;
 }
 
-td button[onclick*="delete"]:hover {
-  background: #c0320e;
-}
+td button[onclick*="delete"]:hover { background: #c0320e; }
 
 /* =========================
    STATUS BADGES
@@ -469,10 +470,10 @@ td button[onclick*="delete"]:hover {
   display: inline-block;
 }
 
-.status.pending  { background: #fff3cd; color: #856404; }
-.status.approved { background: #d1f0da; color: #155724; }
-.status.rejected { background: #f8d7da; color: #721c24; }
-.status.allocated{ background: #cce5ff; color: #004085; }
+.status.pending   { background: #fff3cd; color: #856404; }
+.status.approved  { background: #d1f0da; color: #155724; }
+.status.rejected  { background: #f8d7da; color: #721c24; }
+.status.allocated { background: #cce5ff; color: #004085; }
 
 /* =========================
    RESPONSIVE — TABLET
@@ -524,6 +525,12 @@ td button[onclick*="delete"]:hover {
     width: 100%;
     flex: unset;
   }
+
+  /* Lift logout a bit more on mobile
+     since the sidebar is shorter */
+  #logoutBtn {
+    margin-bottom: 32px;
+  }
 }
 
 /* =========================
@@ -535,9 +542,7 @@ td button[onclick*="delete"]:hover {
     gap: 10px;
   }
 
-  .card {
-    padding: 14px;
-  }
+  .card { padding: 14px; }
 
   th, td {
     padding: 8px 6px;
