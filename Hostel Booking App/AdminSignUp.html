@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Auth</title>
+  <link rel="stylesheet" href="./css/AdminSignUp.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="title">Bookie Hostel</div>
+
+  <div class="card">
+    <div class="switch">
+      <button class="active">Sign Up</button>
+      <button id="openLogin">Log In</button>
+    </div>
+
+    <div class="form">
+      <div class="row">
+        <input id="firstName" type="text" placeholder="First Name">
+        <input id="lastName" type="text" placeholder="Last Name">
+      </div>
+
+      <input id="email" class="full" type="email" placeholder="Someone@example.com">
+
+      <div class="password-box full">
+        <input id="password" type="password" placeholder="Password">
+        <span class="toggle-password" data-target="password">👁</span>
+      </div>
+
+      <button id="signupBtn" class="submit-btn">Sign Up</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <div class="close" id="closeLogin">&#x2715;</div>
+
+    <div class="switch">
+      <button id="backToSignup">Sign Up</button>
+      <button class="active">Log In</button>
+    </div>
+
+    <div class="form">
+      <input id="loginEmail" class="full" type="email" placeholder="Someone@example.com">
+
+      <div class="password-box full">
+        <input id="loginPassword" type="password" placeholder="Password">
+        <span class="toggle-password" data-target="loginPassword">👁</span>
+      </div>
+
+      <button id="loginBtn" class="submit-btn">Log In</button>
+    </div>
+  </div>
+</div>
+
+<script src="./JS/AdminSignUp.js"></script>
+</body>
+</html>
