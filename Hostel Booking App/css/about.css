@@ -1,6 +1,4 @@
-/* ================== BOOKIE HOSTEL ABOUT CSS ================== */
-
-/* Reset */
+/* ================== RESET & BODY ================== */
 * {
   margin: 0;
   padding: 0;
@@ -39,11 +37,12 @@ header .logo:hover {
   transform: scale(1.05);
 }
 
-/* NAVIGATION */
+/* ================== NAV — desktop unchanged ================== */
 nav {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  align-items: center;
   transition: all 0.3s ease;
 }
 
@@ -86,6 +85,47 @@ nav a:hover::after {
 .user-profile img:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ================== HAMBURGER — hidden on desktop ================== */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  z-index: 1100;
+}
+
+.nav-toggle:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ================== HERO ================== */
@@ -221,32 +261,89 @@ footer {
 /* ================== ANIMATIONS ================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ================== RESPONSIVE ================== */
+/* ================== RESPONSIVE — TABLET ================== */
 @media (max-width: 1024px) {
   header { padding: 10px 30px; }
   .hero h1 { font-size: 2.5rem; }
   .about-section { padding: 30px; gap: 30px; }
-  .user-profile{
-    margin-left: 170px;
-  }
   .features { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
 }
 
+/* ================== RESPONSIVE — MOBILE ================== */
 @media (max-width: 768px) {
-  header { flex-direction: column; align-items: flex-start; gap: 10px; }
-  nav { flex-direction: column; width: 100%; gap: 10px; }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  header {
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 0;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    gap: 0;
+    padding: 0 4px;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                padding 0.3s ease;
+  }
+
+  nav.open {
+    max-height: 400px;
+    opacity: 1;
+    padding: 10px 4px 14px;
+  }
+
+  nav a {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
   .hero h1 { font-size: 2rem; }
-  .about-section { flex-direction: column; align-items: center; padding: 20px; gap: 20px; }
+  .about-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
   .benefits { padding: 30px; gap: 20px; }
+
+  .user-profile {
+    margin-left: 0;
+  }
 }
 
+/* ================== RESPONSIVE — SMALL MOBILE ================== */
 @media (max-width: 480px) {
   header { padding: 10px 15px; }
-  nav a { font-size: 0.9rem; }
   .hero h1 { font-size: 1.5rem; }
-  .features { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 15px; }
-  .benefits { grid-template-columns: 1fr; padding: 20px; gap: 15px; }
+  .features {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 15px;
+  }
+  .benefits {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 15px;
+  }
+  nav a { font-size: 0.9rem; }
 }
