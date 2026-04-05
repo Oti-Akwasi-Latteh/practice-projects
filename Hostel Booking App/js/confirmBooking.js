@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const genderSelect = document.getElementById("gender");
   let selectedBooking = null;
 
+
   // ================= LOAD BOOKINGS =================
   function loadBookings() {
     const allBookings = JSON.parse(localStorage.getItem("bookedHostels")) || [];
@@ -29,19 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = "";
 
     if (myBookings.length === 0) {
-      container.innerHTML = `<div class="empty-message"><h3>No hostel booked yet</h3></div>`;
+      container.innerHTML = `
+        <div class="empty-message">
+          <h3>No hostel booked yet</h3>
+          <p>Go to the hostels page to book one.</p>
+        </div>
+      `;
       return;
     }
 
     myBookings.forEach(booking => {
+
+      // Check if hostel still exists in admin's localStorage
+      const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
+      const hostelStillExists = hostels.find(h => h.id === booking.hostelId);
+
       const card = document.createElement("div");
       card.className = "booking-card";
-
       card.innerHTML = `
         <h2>${booking.hostel}</h2>
         <p><strong>Location:</strong> ${booking.location}</p>
-        <p><strong>Room:</strong> ${booking.room}</p>
+        <p><strong>Room Capacity:</strong> ${booking.room}-Person Room</p>
         <p><strong>Price:</strong> ${booking.price}</p>
+        ${!hostelStillExists
+          ? `<p class="warn-text">⚠ This hostel may no longer be available</p>`
+          : ""}
         <div class="button-group">
           <button class="apply-btn" data-id="${booking.bookingId}">Apply</button>
           <button class="cancel-btn" data-id="${booking.bookingId}">Cancel</button>
@@ -49,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       container.appendChild(card);
     });
+
 
     // ================= APPLY BUTTON =================
     document.querySelectorAll(".apply-btn").forEach(button => {
@@ -62,24 +76,29 @@ document.addEventListener("DOMContentLoaded", () => {
         lastNameInput.value = usernameParts.slice(1).join(" ") || "";
         emailInput.value = currentUser.email || "";
 
-        modalText.textContent = `Applying for ${selectedBooking.hostel} - ${selectedBooking.room}`;
+        modalText.textContent =
+          `Applying for ${selectedBooking.hostel} — ${selectedBooking.room}-Person Room`;
         errorText.textContent = "";
         modal.style.display = "flex";
       });
     });
 
+
     // ================= CANCEL BUTTON =================
     document.querySelectorAll(".cancel-btn").forEach(button => {
       button.addEventListener("click", () => {
         const bookingId = Number(button.dataset.id);
+        if (!confirm("Remove this booking?")) return;
+
         let bookings = JSON.parse(localStorage.getItem("bookedHostels")) || [];
         bookings = bookings.filter(b => b.bookingId !== bookingId);
         localStorage.setItem("bookedHostels", JSON.stringify(bookings));
         loadBookings();
-        alert("Booking removed successfully");
+        alert("Booking removed successfully.");
       });
     });
   }
+
 
   // ================= CLOSE MODAL =================
   function closeModal() {
@@ -87,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedBooking = null;
   }
   window.closeModal = closeModal;
+
 
   // ================= SUBMIT APPLICATION =================
   document.getElementById("submitApplication").addEventListener("click", () => {
@@ -99,46 +119,71 @@ document.addEventListener("DOMContentLoaded", () => {
     const gender = genderSelect.value;
 
     if (!firstName || !lastName || !email || !school || !gender) {
-      errorText.textContent = "Fill all fields";
+      errorText.textContent = "Please fill all fields.";
       return;
     }
 
+    // ================= NAME MATCH CHECK =================
     const usernameParts = currentUser.username.trim().split(" ");
-    const expectedFirstName = (usernameParts[0] || "").toLowerCase();
-    const expectedLastName = usernameParts.slice(1).join(" ").toLowerCase();
+    const expectedFirst = (usernameParts[0] || "").toLowerCase();
+    const expectedLast = usernameParts.slice(1).join(" ").toLowerCase();
 
     if (
-      firstName.toLowerCase() !== expectedFirstName ||
-      lastName.toLowerCase() !== expectedLastName
+      firstName.toLowerCase() !== expectedFirst ||
+      lastName.toLowerCase() !== expectedLast
     ) {
-      errorText.textContent = "First name and last name must match your signed-in username";
+      errorText.textContent = "Name must match your account username.";
       return;
     }
 
+    // ================= EMAIL MATCH CHECK =================
     if (email.toLowerCase() !== currentUser.email.toLowerCase()) {
-      errorText.textContent = "Please use the same email used to log in";
+      errorText.textContent = "Please use the email you signed in with.";
       return;
     }
 
-    // ================= FIND ROOM FROM LOCALSTORAGE =================
+    // ================= VERIFY HOSTEL STILL EXISTS =================
+    const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
+    const hostel = hostels.find(h => h.id === selectedBooking.hostelId);
+
+    if (!hostel) {
+      errorText.textContent = "This hostel no longer exists. Please cancel and rebook.";
+      return;
+    }
+
+    // ================= FIND MATCHING AVAILABLE ROOM =================
     const rooms = JSON.parse(localStorage.getItem("rooms")) || [];
-    const room = rooms.find(r => String(r.id) === String(selectedBooking.roomId));
+    const roomCapacity = parseInt(selectedBooking.room);
+
+    // First try to find the exact room that was booked
+    let room = rooms.find(r => r.id === selectedBooking.roomId);
+
+    // If that room is now occupied or gone, find any available room
+    // with the same capacity as a fallback
+    if (!room || (room.status && room.status.toLowerCase() !== "available")) {
+      room = rooms.find(r => {
+        const sameCapacity = Number(r.capacity) === roomCapacity;
+        const isAvailable = !r.status || r.status.toLowerCase() === "available";
+        return sameCapacity && isAvailable;
+      });
+    }
 
     if (!room) {
-      errorText.textContent = "Room not found. Please try again.";
+      errorText.textContent = "No available room found. The room may have been filled.";
       return;
     }
 
-    // ================= CHECK FOR DUPLICATE APPLICATION =================
-    let students = JSON.parse(localStorage.getItem("students")) || [];
+    // ================= DUPLICATE APPLICATION CHECK =================
+    const students = JSON.parse(localStorage.getItem("students")) || [];
 
     const alreadyApplied = students.find(
-      s => String(s.userId) === String(currentUser.id) &&
-           s.hostel === selectedBooking.hostel
+      s =>
+        String(s.userId) === String(currentUser.id) &&
+        s.hostel === hostel.name
     );
 
     if (alreadyApplied) {
-      errorText.textContent = "You have already applied for this hostel";
+      errorText.textContent = "You have already applied for this hostel.";
       return;
     }
 
@@ -149,7 +194,8 @@ document.addEventListener("DOMContentLoaded", () => {
       email,
       school,
       gender,
-      hostel: selectedBooking.hostel,
+      hostel: hostel.name,
+      hostelId: hostel.id,
       roomNumber: room.roomNumber,
       roomId: room.id,
       userId: currentUser.id,
@@ -160,14 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
     students.push(newStudent);
     localStorage.setItem("students", JSON.stringify(students));
 
-    // ================= REMOVE FROM BOOKINGS =================
+    // ================= REMOVE BOOKING AFTER APPLYING =================
     let bookings = JSON.parse(localStorage.getItem("bookedHostels")) || [];
     bookings = bookings.filter(b => b.bookingId !== selectedBooking.bookingId);
     localStorage.setItem("bookedHostels", JSON.stringify(bookings));
 
-    alert("Application submitted successfully");
+    alert("Application submitted successfully!");
     window.location.href = "confirmMessage.html";
   });
+
 
   // ================= INITIAL LOAD =================
   loadBookings();
