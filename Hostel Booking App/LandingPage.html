@@ -45,6 +45,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <h1 class="logo">Bookie</h1>
 
+<!-- Add this inside <header class="navbar"> after .logo -->
+<button class="nav-toggle" aria-label="Toggle navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
 <nav>
 
 <a class="active" href="#">Home</a>
@@ -91,5 +98,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             </span>
         </div>
     </div>
+
+<!-- Add just before </body> on your landing page -->
+<script>
+  const navToggle = document.querySelector(".nav-toggle");
+  const nav       = document.querySelector("nav");
+
+  if (navToggle && nav) {
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+
+    // Close nav when a link is tapped on mobile
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navToggle.classList.remove("open");
+        nav.classList.remove("open");
+      });
+    });
+  }
+</script>
+
 </body>
 </html>
