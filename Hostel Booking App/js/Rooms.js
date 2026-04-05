@@ -23,158 +23,117 @@ function updateBookingCount() {
 updateBookingCount();
 
 
-// ================= RENDER HOSTELS DYNAMICALLY =================
-function renderHostels() {
-  const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
-  const rooms = JSON.parse(localStorage.getItem("rooms")) || [];
-
-  const container = document.getElementById("hostelListContainer");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (hostels.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <h3>No hostels available yet</h3>
-        <p>Please check back later.</p>
-      </div>
-    `;
-    return;
-  }
-
-  // Get all available rooms
-  const availableRooms = rooms.filter(
-    r => !r.status || r.status.toLowerCase() === "available"
-  );
-
-  hostels.forEach(hostel => {
-
-    // Get unique capacities from available rooms
-    const capacities = [...new Set(availableRooms.map(r => Number(r.capacity)))];
-
-    const roomButtons = capacities.length > 0
-      ? capacities.map(cap => `
-          <button
-            class="book-room"
-            data-hostelid="${hostel.id}"
-            data-hostel="${hostel.name}"
-            data-room="${cap}"
-            data-location="${hostel.location}"
-            data-price="Contact for price"
-          >
-            Book ${cap}-Person Room
-          </button>
-        `).join("")
-      : `<p class="no-rooms">No rooms available at the moment</p>`;
-
-    const card = document.createElement("div");
-    card.className = "hostel-card";
-    card.innerHTML = `
-      <div class="hostel-info">
-        <h2>${hostel.name}</h2>
-        <p><strong>Location:</strong> ${hostel.location}</p>
-        <p><strong>Description:</strong> ${hostel.description}</p>
-        <p><strong>Contact:</strong> ${hostel.contactInfo}</p>
-      </div>
-      <div class="room-buttons">
-        ${roomButtons}
-      </div>
-    `;
-    container.appendChild(card);
-  });
-
-  // Attach listeners after cards are in the DOM
-  attachBookListeners();
+// ================= HELPER: EXTRACT CAPACITY =================
+function extractCapacity(roomType) {
+  const str = (roomType || "").toLowerCase().trim();
+  if (str.includes("single")) return 1;
+  if (str.includes("one")) return 1;
+  const match = str.match(/^(\d+)/);
+  if (match) return parseInt(match[1]);
+  return 1;
 }
 
 
-// ================= ATTACH BOOK LISTENERS =================
-function attachBookListeners() {
-  document.querySelectorAll(".book-room").forEach(button => {
-    button.addEventListener("click", function () {
+// ================= BOOK HOSTEL =================
+document.querySelectorAll(".book-room").forEach(button => {
+  button.addEventListener("click", function () {
 
-      const hostelId = parseInt(this.dataset.hostelid);
-      const hostelName = this.dataset.hostel.trim();
-      const roomType = this.dataset.room.trim();
-      const location = this.dataset.location.trim();
-      const price = this.dataset.price.trim();
+    const hostelName = this.dataset.hostel.trim();
+    const roomType   = this.dataset.room.trim();
+    const location   = this.dataset.location.trim();
+    const price      = this.dataset.price.trim();
 
-      // ================= FIND HOSTEL BY ID =================
-      const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
-      const hostel = hostels.find(h => h.id === hostelId);
+    // ================= CHECK ADMIN HAS ADDED HOSTELS =================
+    const hostels = JSON.parse(localStorage.getItem("hostels")) || [];
 
-      if (!hostel) {
-        alert("Hostel not found. Please refresh the page.");
-        return;
-      }
+    if (hostels.length === 0) {
+      alert("No hostels have been added by the admin yet. Please check back later.");
+      return;
+    }
 
-      // ================= FIND AVAILABLE ROOM BY CAPACITY =================
-      const rooms = JSON.parse(localStorage.getItem("rooms")) || [];
-      const roomCapacity = parseInt(roomType);
+    // ================= FIND HOSTEL BY NAME =================
+    const hostel = hostels.find(
+      h => h.name.trim().toLowerCase() === hostelName.toLowerCase()
+    );
 
-      const availableRoom = rooms.find(room => {
-        const sameCapacity = Number(room.capacity) === roomCapacity;
-        const isAvailable = !room.status || room.status.toLowerCase() === "available";
-        return sameCapacity && isAvailable;
-      });
-
-      if (!availableRoom) {
-        alert("No available room for this selection. Please try another.");
-        return;
-      }
-
-      // ================= DUPLICATE CHECK =================
-      bookedHostels = JSON.parse(localStorage.getItem("bookedHostels")) || [];
-
-      const alreadyBooked = bookedHostels.find(
-        booking =>
-          booking.userId === currentUser.id &&
-          booking.hostelId === hostel.id
+    if (!hostel) {
+      const available = hostels.map(h => `• ${h.name}`).join("\n");
+      alert(
+        `"${hostelName}" has not been added to the system yet.\n\n` +
+        `Currently available hostels:\n${available}\n\n` +
+        `Please contact the admin to add this hostel.`
       );
+      return;
+    }
 
-      if (alreadyBooked) {
-        alert("You have already booked this hostel.");
-        return;
-      }
+    // ================= CHECK ADMIN HAS ADDED ROOMS =================
+    const rooms = JSON.parse(localStorage.getItem("rooms")) || [];
 
-      // ================= MAX BOOKINGS CHECK =================
-      const userBookings = bookedHostels.filter(
-        booking => booking.userId === currentUser.id
-      );
+    if (rooms.length === 0) {
+      alert("No rooms have been added by the admin yet. Please check back later.");
+      return;
+    }
 
-      if (userBookings.length >= 5) {
-        alert("You can only book a maximum of 5 hostels.");
-        return;
-      }
+    // ================= FIND AVAILABLE ROOM BY CAPACITY =================
+    const roomCapacity = extractCapacity(roomType);
 
-      // ================= SAVE BOOKING =================
-      const booking = {
-        bookingId: Date.now(),
-        userId: currentUser.id,
-        hostelId: hostel.id,
-        hostel: hostel.name,
-        location: hostel.location,
-        roomId: availableRoom.id,
-        room: roomType,
-        price,
-        status: "Pending",
-      };
-
-      bookedHostels.push(booking);
-      localStorage.setItem("bookedHostels", JSON.stringify(bookedHostels));
-
-      updateBookingCount();
-      alert(`"${hostel.name}" added to your bookings!`);
+    const availableRoom = rooms.find(room => {
+      const capacityMatch = Number(room.capacity) === roomCapacity;
+      const isAvailable   = !room.status || room.status.toLowerCase() === "available";
+      return capacityMatch && isAvailable;
     });
+
+    if (!availableRoom) {
+      alert(
+        `No available "${roomType}" found.\n` +
+        `All rooms of this type may be occupied or not yet added by the admin.`
+      );
+      return;
+    }
+
+    // ================= DUPLICATE BOOKING CHECK =================
+    bookedHostels = JSON.parse(localStorage.getItem("bookedHostels")) || [];
+
+    const alreadyBooked = bookedHostels.find(
+      b => b.userId === currentUser.id && b.hostelId === hostel.id
+    );
+
+    if (alreadyBooked) {
+      alert("You have already booked this hostel.");
+      return;
+    }
+
+    // ================= MAX BOOKINGS CHECK =================
+    const userBookings = bookedHostels.filter(
+      b => b.userId === currentUser.id
+    );
+
+    if (userBookings.length >= 5) {
+      alert("You can only book a maximum of 5 hostels.");
+      return;
+    }
+
+    // ================= SAVE BOOKING TO LOCALSTORAGE =================
+    const booking = {
+      bookingId : Date.now(),
+      userId    : currentUser.id,
+      hostelId  : hostel.id,
+      hostel    : hostel.name,
+      location  : location,
+      roomId    : availableRoom.id,
+      room      : roomType,
+      price     : price,
+      status    : "Pending",
+    };
+
+    bookedHostels.push(booking);
+    localStorage.setItem("bookedHostels", JSON.stringify(bookedHostels));
+
+    updateBookingCount();
+    alert(`"${hostel.name}" has been added to your bookings!`);
   });
-}
-
-
-// ================= INIT =================
-document.addEventListener("DOMContentLoaded", () => {
-  renderHostels();
 });
+
 
 // ================= SYNC COUNT ACROSS TABS =================
 window.addEventListener("storage", () => {
