@@ -2,7 +2,7 @@
 // js/Rooms.js  (user booking page)
 // =============================================
 
-const ROOMS_API = "http://localhost:9000/api";
+const ROOMS_API = "https://bookie-app-r03w.onrender.com/api";
 
 // ── Auth guard ────────────────────────────────────────────────
 const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
