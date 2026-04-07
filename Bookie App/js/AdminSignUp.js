@@ -1,7 +1,7 @@
 // js/AdminSignUp.js
 // =============================================
 
-const API = "http://localhost:9000/api";
+const API = "https://bookie-app-r03w.onrender.com/api";
 const AUTHORIZED_EMAIL = "quasilyphae@gmail.com";
 
 // ── ADMIN SIGNUP ─────────────────────────────
