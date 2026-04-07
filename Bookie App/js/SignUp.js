@@ -3,7 +3,7 @@
 // =============================================
  
 document.addEventListener("DOMContentLoaded", function () {
-  const SIGNUP_API = "http://localhost:9000/api";
+  const SIGNUP_API = "https://bookie-app-r03w.onrender.com/api";
  
   document.getElementById("signIn").addEventListener("click", async function () {
     const username        = document.getElementById("user").value.trim();
