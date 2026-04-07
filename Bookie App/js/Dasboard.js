@@ -2,7 +2,7 @@
 // js/Dasboard.js  (user bookings dashboard)
 // =============================================
 
-const DASH_API = "http://localhost:9000/api";
+const DASH_API = "https://bookie-app-r03w.onrender.com/api";
 
 // ── Auth guard ────────────────────────────────────────────────
 const dashUser = JSON.parse(sessionStorage.getItem("currentUser"));
