@@ -1,0 +1,361 @@
+/* =========================
+   RESET & BASE
+========================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: url('../images/GT\ FUND.jpg') no-repeat center center / cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+.container {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+  margin-top: 70px;
+}
+
+/* =========================
+   TITLE
+========================= */
+.title {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: bold;
+  background: #eee;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  transition: font-size 0.3s ease;
+}
+
+/* =========================
+   GLASS CARD
+========================= */
+.card {
+  width: 100%;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  padding: clamp(20px, 5vw, 40px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 16px 50px rgba(0,0,0,0.35);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   SWITCH BUTTONS
+========================= */
+.switch {
+  display: flex;
+  justify-content: center;
+  background: #dcdcdc;
+  border-radius: 30px;
+  width: min(250px, 90%);
+  margin: 0 auto 30px auto;
+  overflow: hidden;
+}
+
+.switch button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-weight: bold;
+  font-size: clamp(13px, 2vw, 15px);
+  transition: background 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+}
+
+.switch button:not(.active):hover {
+  background: rgba(30, 78, 216, 0.1);
+}
+
+.switch .active {
+  background: #1e4ed8;
+  color: white;
+  border-radius: 30px;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+.close {
+  position: absolute;
+  right: 20px;
+  top: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #444;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.close:hover {
+  background: rgba(0,0,0,0.1);
+  color: #e00;
+  transform: rotate(90deg);
+}
+
+/* =========================
+   FORM
+========================= */
+.form {
+  width: min(80%, 500px);
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.row input {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
+input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 25px;
+  border: 2px solid transparent;
+  outline: none;
+  font-size: clamp(14px, 2vw, 16px);
+  background: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.25s ease, background 0.25s ease,
+              box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+input:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+input:focus {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  transform: scale(1.01);
+}
+
+.full {
+  margin-bottom: 20px;
+}
+
+/* =========================
+   PASSWORD BOX
+========================= */
+.password-box {
+  position: relative;
+  width: 100%;
+}
+
+.password-box input {
+  padding-right: 48px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  transition: color 0.2s ease, transform 0.2s ease;
+  user-select: none;
+  line-height: 1;
+}
+
+.toggle-password:hover {
+  color: #1f58b2;
+  transform: translateY(-50%) scale(1.15);
+}
+
+.toggle-password.active {
+  color: #1f58b2;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+.submit-btn {
+  display: block;
+  margin: 28px auto 0;
+  padding: clamp(12px, 2vw, 15px) clamp(30px, 6vw, 50px);
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #6ea8fe, #3b82f6);
+  color: white;
+  font-size: clamp(15px, 2.5vw, 18px);
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease, transform 0.2s ease,
+              box-shadow 0.3s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* =========================
+   MODAL OVERLAY
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: url('../images/hostel-flat-style.webp') no-repeat center center / cover;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =========================
+   MODAL CONTENT
+========================= */
+.modal-content {
+  width: 100%;
+  max-width: 700px;
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  position: relative;
+  animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 80px;
+  }
+
+  .form {
+    width: 90%;
+  }
+
+  .card {
+    border-radius: 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 80px;
+  }
+
+  .container {
+    margin-top: 60px;
+  }
+
+  .title {
+    top: -55px;
+    font-size: 22px;
+    padding: 8px;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .row input {
+    flex: 1 1 100%;
+  }
+
+  .switch {
+    width: 100%;
+  }
+
+  .card {
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+
+  .modal-content {
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  input {
+    padding: 12px 16px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .title {
+    font-size: 18px;
+  }
+
+  input {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}

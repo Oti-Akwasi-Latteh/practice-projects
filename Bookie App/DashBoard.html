@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./css/DashBoard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= HAMBURGER ================= -->
+<button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- ================= OVERLAY ================= -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" id="sidebar">
+
+  <div class="profile">
+    <div class="avatar">
+      <i class="fas fa-user"></i>
+    </div>
+    <h2 id="adminName">Admin</h2>
+    <p>Administrator</p>
+  </div>
+
+  <ul>
+    <li onclick="navTo('dashboardSection')"><i class="fas fa-home"></i> Dashboard</li>
+    <li onclick="navTo('hostelsSection')"><i class="fas fa-building"></i> Hostel</li>
+    <li onclick="navTo('applicationsSection')"><i class="fas fa-file-alt"></i> Applications</li>
+    <li onclick="navTo('roomsSection')"><i class="fas fa-door-open"></i> Rooms</li>
+    <li onclick="navTo('allocationsSection')"><i class="fas fa-tasks"></i> Allocations</li>
+    <li onclick="navTo('usersSection')"><i class="fas fa-users"></i> Users</li>
+  </ul>
+
+  <button id="logoutBtn">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+  <h1>Bookie Dashboard</h1>
+
+  <!-- DASHBOARD HOME -->
+  <div id="dashboardSection" class="section active">
+    <div class="cards">
+      <div class="card blue"><i class="fas fa-hotel card-icon"></i>Total Hostels<br><span id="totalHostels">0</span></div>
+      <div class="card orange"><i class="fas fa-door-open card-icon"></i>Total Rooms<br><span id="totalRooms">0</span></div>
+      <div class="card purple"><i class="fas fa-file-alt card-icon"></i>Total Applications<br><span id="totalApplications">0</span></div>
+      <div class="card green"><i class="fas fa-user-friends card-icon"></i>Total Users<br><span id="totalUsers">0</span></div>
+      <div class="card red"><i class="fas fa-check-circle card-icon"></i>Total Allocations<br><span id="totalAllocations">0</span></div>
+    </div>
+  </div>
+
+  <!-- HOSTEL SECTION -->
+  <div id="hostelsSection" class="section">
+    <h2>Hostel Management</h2>
+
+    <div class="form-bar">
+      <input id="hostelName" placeholder="Hostel Name">
+      <input id="hostelDescription" placeholder="Description">
+      <input id="hostelLocation" placeholder="Location">
+      <input id="hostelContact" placeholder="Contact Info">
+      <button onclick="addHostel()"><i class="fas fa-plus"></i> Add Hostel</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Contact</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="hostelTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- APPLICATIONS SECTION -->
+  <div id="applicationsSection" class="section">
+    <h2>Applications</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Room</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Gender</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="applicationsTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROOMS SECTION -->
+  <div id="roomsSection" class="section">
+    <h2>Room Management</h2>
+
+    <div class="form-bar">
+      <input id="roomName" placeholder="Room Number">
+      <input id="roomCapacity" type="number" placeholder="Capacity">
+      <button onclick="addRoom()"><i class="fas fa-plus"></i> Add Room</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Room ID</th>
+            <th>Room Number</th>
+            <th>Capacity</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="roomList"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ALLOCATION SECTION -->
+  <div id="allocationsSection" class="section">
+    <h2>Hostel Allocations</h2>
+
+    <div class="form-bar">
+      <select id="allocStudentId" style="flex:1 1 200px;padding:10px 14px;border:1px solid #ccc;border-radius:8px;font-size:14px;outline:none;min-width:0;">
+        <option value="">— Select Approved Student —</option>
+      </select>
+      <select id="allocRoomId" style="flex:1 1 200px;padding:10px 14px;border:1px solid #ccc;border-radius:8px;font-size:14px;outline:none;min-width:0;">
+        <option value="">— Select Available Room —</option>
+      </select>
+      <button id="allocateBtn"><i class="fas fa-link"></i> Allocate Student</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Hostel</th>
+            <th>Room</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="allocationTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- USERS SECTION -->
+  <div id="usersSection" class="section">
+    <h2>Users</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="usersList"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script src="./js/AdminDashBoard.js"></script>
+
+</body>
+</html>

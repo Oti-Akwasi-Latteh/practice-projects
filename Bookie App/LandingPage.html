@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookie Hostel</title>
+
+<link rel="stylesheet" href="./css/Style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="top-bar">
+
+<div class="left-top">
+<span><a href="#">Room inquiry</a></span>
+<span><a href="confirmBoooking.html">My Bookings</a></span>
+</div>
+
+<div class="right-top">
+
+<div class="search">
+<input type="text" placeholder="Search hostel...">
+<i class="fa fa-search"></i>
+</div>
+
+<div class="user"><a href="Bookings.html"><i class="fa fa-user"></i></a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NAVBAR -->
+
+<header>
+
+<h1 class="logo">Bookie</h1>
+
+<!-- Add this inside <header class="navbar"> after .logo -->
+<button class="nav-toggle" aria-label="Toggle navigation">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<nav>
+
+<a class="active" href="#">Home</a>
+<a href="about.html">About Us</a>
+<a href="Rooms.html">Rooms</a>
+<a href="ContactUs.html">Contact Us</a>
+
+</nav>
+
+<a href="Rooms.html"> <button class="book-btn">Book Now</button></a>
+
+</header>
+
+ <section>
+        <div class="bg-image">
+            <img src="./images/students.jpg">
+        </div>
+        <h1 class="time">Time To Pack <br> & Explore</h1>
+    </section>
+
+    <section class="rooms">
+
+<img src="./images/room1.jpg">
+<img src="./images/hostel-dormitory-beds.jpg">
+<img src="./images/room2.avif">
+<img src="./images/rooom3.jpg">
+<img src="./images/1 in a room.jpg">
+<img src="./images/prestige.jpg">
+</section>
+
+
+     <!--footer-->
+   
+ 
+    <div class="back-hint">
+                <span><i class="far fa-clock" style="color:blue;"></i> semester & yearly bookings · no nightly rates</span>
+
+            <span>© 2026 Bookie hostels.All Right Reserved</span>
+            <span class="footer-links">
+                 <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fa-solid fa-phone"></i></a>
+            </span>
+        </div>
+    </div>
+
+<!-- Add just before </body> on your landing page -->
+<script>
+  const navToggle = document.querySelector(".nav-toggle");
+  const nav       = document.querySelector("nav");
+
+  if (navToggle && nav) {
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("open");
+      nav.classList.toggle("open");
+    });
+
+    // Close nav when a link is tapped on mobile
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navToggle.classList.remove("open");
+        nav.classList.remove("open");
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
