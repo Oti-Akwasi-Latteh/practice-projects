@@ -3,7 +3,7 @@
 // =============================================
  
 document.addEventListener("DOMContentLoaded", () => {
-  const CONFIRM_API = "http://localhost:9000/api";
+  const CONFIRM_API = "https://bookie-app-r03w.onrender.com/api";
  
   // ── Auth guard ────────────────────────────────────────────
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
