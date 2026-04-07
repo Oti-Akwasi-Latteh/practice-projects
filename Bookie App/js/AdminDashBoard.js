@@ -2,7 +2,7 @@
 // js/DashBoard.js  — merged UI + MongoDB admin
 // =============================================
 
-const API_BASE = "http://localhost:9000/api";
+const API_BASE = "https://bookie-app-r03w.onrender.com/api";
 
 // ── Auth guard ────────────────────────────────────────────────
 const isLoggedIn = sessionStorage.getItem("isLoggedIn");
