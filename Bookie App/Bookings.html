@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Dashboard</title>
-<link rel="stylesheet" href="../css/Bookings.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="../css/Bookings.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-<!-- ================= HAMBURGER ================= -->
+<!-- HAMBURGER -->
 <button class="hamburger" id="hamburger" aria-label="Toggle menu">
   <i class="fas fa-bars"></i>
 </button>
 
-<!-- ================= OVERLAY ================= -->
+<!-- OVERLAY -->
 <div class="overlay" id="overlay"></div>
 
-<div class="container">
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
+  <h2 class="logo">Bookie</h2>
 
-    <h2 class="logo">Bookie</h2>
-
-    <div class="profile">
-      <div class="avatar">
-        <i class="fa fa-user"></i>
-      </div>
-      <h3 id="username"></h3>
-      <p>Student</p>
+  <div class="profile">
+    <div class="avatar">
+      <i class="fas fa-user"></i>
     </div>
-
-    <ul class="menu">
-      <li class="active">
-        <a href="#"><i class="fa fa-th-large"></i> Bookings</a>
-      </li>
-      <li>
-        <a href="Rooms.html"><i class="fa fa-bed"></i> Rooms</a>
-      </li>
-      <li>
-        <a href="LandingPage.html"><i class="fa fa-home"></i> Home</a>
-      </li>
-    </ul>
-
-    <button id="remove-user" class="logout">
-      <i class="fa fa-sign-out-alt"></i> Logout
-    </button>
-
+    <h3 id="username"></h3>
+    <p>Student</p>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main">
-    <h2>My Bookings</h2>
-    <div id="dashboardContainer"></div>
-  </div>
+  <!-- onclick on <li> directly — same pattern as working admin dashboard -->
+  <ul class="menu">
+    <li class="active" onclick="window.location.href='#'">
+      <i class="fas fa-th-large"></i> Bookings
+    </li>
+    <li onclick="window.location.href='Rooms.html'">
+      <i class="fas fa-bed"></i> Rooms
+    </li>
+    <li onclick="window.location.href='LandingPage.html'">
+      <i class="fas fa-home"></i> Home
+    </li>
+  </ul>
 
+  <button id="remove-user" class="logout">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <h2>My Bookings</h2>
+  <div id="dashboardContainer"></div>
 </div>
 
 <script src="../js/Dasboard.js"></script>
